@@ -1,0 +1,11 @@
+io\opensaber\template\pojo\FunctionDefinition.class
+io\opensaber\operations\SampleViewFunctionProvider.class
+io\opensaber\template\pojo\FunctionDefinitons.class
+io\opensaber\operations\FunctionEvaluator.class
+io\opensaber\operations\IViewFunctionProvider.class
+Samlemain.class
+io\opensaber\operations\VMUtils.class
+io\opensaber\operations\Function.class
+io\opensaber\template\pojo\ViewTemplate.class
+VTMain.class
+io\opensaber\template\pojo\Field.class
