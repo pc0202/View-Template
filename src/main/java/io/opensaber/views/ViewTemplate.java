@@ -1,7 +1,6 @@
 package io.opensaber.views;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 import java.util.List;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -35,5 +34,24 @@ public class ViewTemplate {
     }
     public void setFields(List<Field> fields) {
         this.fields = fields;
+    }
+    /**
+     * return the result for a given function name 
+     * Example: "arg1 + \" : \" + arg2"
+     * 
+     * @param name      function name (like concat)
+     * @return          result
+     */
+    public String getExpression(String name) {
+        String expression = "";
+        for (FunctionDefinition fd : this.getFunctionDefinitions()) {
+            if (fd.getName().compareTo(name) == 0) {
+                expression = fd.getResult();
+            }
+        }
+        if (expression.isEmpty()) {
+            throw new IllegalArgumentException("No function definition specified for function - " + name);
+        }
+        return expression;
     }
 }
