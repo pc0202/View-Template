@@ -1,4 +1,4 @@
-package io.opensaber;
+package io.opensaber.views;
 
 import java.util.List;
 

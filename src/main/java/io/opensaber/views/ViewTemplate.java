@@ -1,7 +1,7 @@
-package io.opensaber.template.pojo;
+package io.opensaber.views;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.databind.JsonNode;
+
 import java.util.List;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -9,7 +9,7 @@ public class ViewTemplate {
 
     private String id;
     private String subject;    
-    private List<io.opensaber.template.pojo.Field> fields;
+    private List<Field> fields;
     private List<FunctionDefinition> functionDefinitions;
     
     public String getId() {
@@ -30,10 +30,10 @@ public class ViewTemplate {
     public void setFunctionDefinitions(List<FunctionDefinition> functionDefinitions) {
         this.functionDefinitions = functionDefinitions;
     }
-    public List<io.opensaber.template.pojo.Field> getFields() {
+    public List<Field> getFields() {
         return fields;
     }
-    public void setFields(List<io.opensaber.template.pojo.Field> fields) {
+    public void setFields(List<Field> fields) {
         this.fields = fields;
     }
 }

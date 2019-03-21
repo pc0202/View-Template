@@ -2,12 +2,12 @@ package io.opensaber.views;
 
 import java.util.List;
 
-public class Function {
+public class FieldFunction {
 
     private String expression;
     private List<Object> argValues;
 
-    public Function(String expression) {
+    public FieldFunction(String expression) {
         this.expression = expression;
     }
 

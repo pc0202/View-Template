@@ -1,4 +1,4 @@
-package io.opensaber.template.pojo;
+package io.opensaber.views;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 

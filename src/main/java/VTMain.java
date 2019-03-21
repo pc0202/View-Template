@@ -1,8 +1,8 @@
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import io.opensaber.operations.VMUtils;
-import io.opensaber.template.pojo.ViewTemplate;
+import io.opensaber.views.Transformer;
+import io.opensaber.views.ViewTemplate;
+
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -11,30 +11,58 @@ import java.nio.charset.StandardCharsets;
 
 public class VTMain {
 
-    public static void main(String[] args) {
-
+    public static void personExample() {
         try {
-            //build a sample person record
-            ObjectNode personNode = JsonNodeFactory.instance.objectNode();
-            String personJson = "{\"Person\": {\"nationalIdentifier\":\"124384379\",\"name\":\"Pritha Chattopadhyay\",\"gender\":\"FEMALE\",\"dob\":\"1990-12-10\"}}";
-            personNode  = (ObjectNode) new ObjectMapper().readTree(personJson);
+            String personJson = "{\"Person\": " +
+                    "               {\"nationalIdentifier\":\"nid823\"," +
+                    "                \"firstName\":\"Ram\"," +
+                    "                \"lastName\":\"Moorthy\"," +
+                    "                \"gender\":\"MALE\"," +
+                    "                \"dob\":\"1990-12-10\"}}";
+            ObjectNode personNode = (ObjectNode) new ObjectMapper().readTree(personJson);
 
-            //build the ViewTemplate
-            String viewTemplateJson = getContent("viewtemplate.json");
+            // read from the ViewTemplate
+            String viewTemplateJson = readFileContent("personVT1.json");
             ViewTemplate viewTemplate = new ObjectMapper().readValue(viewTemplateJson, ViewTemplate.class);
-            
-            //action:- do the transformation
-            VMUtils.transform(viewTemplate, personNode);
-            System.out.println("print person node "+personNode);
+
+            // transform action
+            System.out.println("Person record " + personNode);
+            System.out.println("Person from view template" + new Transformer().transform(viewTemplate, personNode));
 
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
-
     }
-    
-    private static String getContent(String fileName) {
+
+    public static void simpleMathExample() {
+        try {
+            String mathProblem = "{\"Math\": " +
+                    "               {\"a\": 5," +
+                    "                \"b\": 2 }}";
+            ObjectNode personNode = (ObjectNode) new ObjectMapper().readTree(mathProblem);
+
+            // read from the ViewTemplate
+            String viewTemplateJson = readFileContent("mathVT1.json");
+            ViewTemplate viewTemplate = new ObjectMapper().readValue(viewTemplateJson, ViewTemplate.class);
+
+            // transform action
+            System.out.println("Maths record " + mathProblem);
+            System.out.println("Maths from view templates " + new Transformer().transform(viewTemplate, personNode));
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void main(String[] args) {
+        System.out.println("**************************");
+        personExample();
+        System.out.println("**************************");
+        simpleMathExample();
+        System.out.println("**************************");
+    }
+
+    private static String readFileContent(String fileName) {
         InputStream in;
         try {
             in = VTMain.class.getClassLoader().getResourceAsStream(fileName);

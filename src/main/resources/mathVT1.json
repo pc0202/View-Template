@@ -1,15 +1,13 @@
 {
-  "id": "personDefaultView1",
-  "subject": "Person",
+  "subject": "MathProblem",
   "fields": [
     {
         "name": "a",
-        "title": "addendum"
+        "title": "addend_A"
     },
     {
       "name": "b",
-      "title": "addend",
-      "display": true
+      "title": "addend_B"
     },
     {
         "title": "SUM",
