@@ -1,10 +1,8 @@
-package io.opensaber.operations;
+package io.opensaber.views;
 
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import io.opensaber.template.pojo.Field;
-import io.opensaber.template.pojo.ViewTemplate;
 
-public class VMUtils {
+public class ViewTransformer {
 
     public static void transform(ViewTemplate viewTemplate, ObjectNode node) {
         // for each field array item

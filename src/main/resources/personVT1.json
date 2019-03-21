@@ -3,8 +3,12 @@
   "subject": "Person",
   "fields": [
     {
-        "name": "name",
+        "name": "firstName",
         "title": "NAME"
+    },
+    {
+      "name": "lastName",
+      "display": true
     },
     {
         "name": "nationalIdentifier",
@@ -13,20 +17,22 @@
         "$comment": "This field is not displayable, but needed for internal referencing"
     },
     {
-        "name": "uniqName",
-        "function": "#/functionDefinitions/concat(name, nationalIdentifier)",
+        "title": "Name in passport",
+        "function": "#/functionDefinitions/concat($lastName, $firstName)",
         "$comment": "This is a virtual field not defined in the schema"
     },
-    {    "name": "vehicles",
+    {
+        "name": "vehicles",
         "$comment": "Nested child entity which may be of interest",
         "fetchType": "eager",
-        "viewTemplateName": "vehicleNameView.json"
+        "viewTemplateName": "vehicleNameView.json",
+        "display": false
     }
   ],
   "functionDefinitions": [
       {
             "name" : "concat",
-            "result": "arg1 + \" : \" + arg2",
+            "result": "arg1 + \", \" + arg2",
             "$comment": "arg1 and arg2 will be populated with parameter values at runtime"
       },
       {

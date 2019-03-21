@@ -1,4 +1,4 @@
-package io.opensaber.operations;
+package io.opensaber;
 
 import java.util.List;
 

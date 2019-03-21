@@ -9,7 +9,7 @@ public class ViewTemplate {
 
     private String id;
     private String subject;    
-    private List<Field> fields;
+    private List<io.opensaber.template.pojo.Field> fields;
     private List<FunctionDefinition> functionDefinitions;
     
     public String getId() {
@@ -30,21 +30,10 @@ public class ViewTemplate {
     public void setFunctionDefinitions(List<FunctionDefinition> functionDefinitions) {
         this.functionDefinitions = functionDefinitions;
     }
-    public List<Field> getFields() {
+    public List<io.opensaber.template.pojo.Field> getFields() {
         return fields;
     }
-    public void setFields(List<Field> fields) {
+    public void setFields(List<io.opensaber.template.pojo.Field> fields) {
         this.fields = fields;
     }
-    
-    public JsonNode transform(JsonNode input) {
-        // for each field array item
-        //   - if function is specified
-        ///     - call inline function expression evaluation
-        //   - if provider is specified
-        //      - instantiate the provider and do an invoke on provider.doOperation
-        //   - else: nothing
-        return null;
-    }
-    
 }

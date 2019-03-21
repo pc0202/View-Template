@@ -1,0 +1,27 @@
+{
+  "id": "personDefaultView1",
+  "subject": "Person",
+  "fields": [
+    {
+        "name": "a",
+        "title": "addendum"
+    },
+    {
+      "name": "b",
+      "title": "addend",
+      "display": true
+    },
+    {
+        "title": "SUM",
+        "function": "#/functionDefinitions/mathOperation($a, $b)",
+        "$comment": "This is a virtual field not defined in the schema"
+    }
+  ],
+  "functionDefinitions": [
+      {
+            "name" : "mathOperation",
+            "result": "arg1 + arg2",
+            "$comment": "arg1 and arg2 will be populated with parameter values at runtime"
+      }
+  ]
+}
