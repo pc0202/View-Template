@@ -46,6 +46,7 @@ public class Transformer {
 
                 if (field.getDisplay()) {
                     result.put(field.getTitle(), evaluator.evaluate().toString());
+
                 }
             } else if (field.getDisplay()) {
                 result.set(field.getTitle(), nodeAttrs.get(field.getName()));

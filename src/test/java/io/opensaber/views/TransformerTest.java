@@ -11,7 +11,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
-import org.junit.Ignore;
 import org.junit.Test;
 
 public class TransformerTest {
@@ -31,14 +30,17 @@ public class TransformerTest {
         ViewTemplate viewTemplate = new ObjectMapper().readValue(viewTemplateJson, ViewTemplate.class);
 
         JsonNode actualnode = transformer.transform(viewTemplate, personNode);  
+
         System.out.println("actualnode = "+actualnode);
         JsonNode expectedNode = new ObjectMapper().readTree("{\"Person\":{\"NAME\":\"Ram\",\"lastName\":\"Moorthy\",\"Name in passport\":\"Moorthy, Ram\"}}");
         System.out.println("expectedNode = "+expectedNode);
+
         assertEquals(expectedNode, actualnode);
 
     }
     
-    @Test@Ignore
+
+    @Test
     public void testTransformForMathVT() throws JsonProcessingException, IOException{
         String mathProblem = "{\"Math\": " +
                 "               {\"a\": 5," +
@@ -49,7 +51,7 @@ public class TransformerTest {
         ViewTemplate viewTemplate = new ObjectMapper().readValue(viewTemplateJson, ViewTemplate.class);
 
         JsonNode actualnode = transformer.transform(viewTemplate, node); 
-        JsonNode expectedNode = new ObjectMapper().readTree("{\"Math\":{\"addend_A\":5,\"addend_B\":2,\"SUM\":7}}");        
+        JsonNode expectedNode = new ObjectMapper().readTree("{\"Math\":{\"addend_A\":5,\"addend_B\":2,\"SUM\":\"7\"}}");        
         assertEquals(expectedNode.toString(), actualnode.toString());
 
     }

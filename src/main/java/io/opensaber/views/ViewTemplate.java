@@ -49,7 +49,8 @@ public class ViewTemplate {
         String expression = "";
         for (FunctionDefinition fd : this.getFunctionDefinitions()) {
             if (fd.getName().compareTo(name) == 0) {
-                expression = fd.getResult() != null ? fd.getResult() : fd.getProvider();
+                expression = fd.getResult();
+
             }
         }
         if (expression.isEmpty()) {
