@@ -1,11 +1,13 @@
 package io.opensaber.views;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 import java.util.List;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ViewTemplate {
+    private static Logger logger = LoggerFactory.getLogger(ViewTemplate.class);
 
     private String id;
     private String subject;    
@@ -35,5 +37,25 @@ public class ViewTemplate {
     }
     public void setFields(List<Field> fields) {
         this.fields = fields;
+    }
+    /**
+     * return the result for a given function name 
+     * Example: "arg1 + \" : \" + arg2"
+     * 
+     * @param name      function name (like concat)
+     * @return          result
+     */
+    public String getExpression(String name) {
+        String expression = "";
+        for (FunctionDefinition fd : this.getFunctionDefinitions()) {
+            if (fd.getName().compareTo(name) == 0) {
+                expression = fd.getResult() != null ? fd.getResult() : fd.getProvider();
+            }
+        }
+        if (expression.isEmpty()) {
+            logger.error("No function definition specified for function - " + name);
+            throw new IllegalArgumentException("No function definition specified for function - " + name);
+        }
+        return expression;
     }
 }

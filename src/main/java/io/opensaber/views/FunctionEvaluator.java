@@ -1,15 +1,12 @@
 package io.opensaber.views;
 
-
-
+import java.util.List;
 import org.apache.commons.jexl2.Expression;
 import org.apache.commons.jexl2.JexlContext;
 import org.apache.commons.jexl2.JexlEngine;
 import org.apache.commons.jexl2.MapContext;
 
-import java.util.List;
-
-public class FunctionEvaluator<T> {
+public class FunctionEvaluator {
     private static final JexlEngine jexl = new JexlEngine();
     private JexlContext jexlContext = new MapContext();
     private FieldFunction function;
@@ -21,7 +18,7 @@ public class FunctionEvaluator<T> {
 
     public void setContextArgs() {
         int itr = 1;
-        for(Object val : function.getArgValues()) {
+        for (Object val : function.getArgValues()) {
             String arg = "arg" + itr++;
             jexlContext.set(arg, val);
         }
@@ -32,9 +29,9 @@ public class FunctionEvaluator<T> {
         setContextArgs();
     }
 
-    public T evaluate() {
+    public Object evaluate() {
         prepare();
-        T result = (T) jexlExpression.evaluate(jexlContext);
+        Object result = jexlExpression.evaluate(jexlContext);
 
         return result;
     }
