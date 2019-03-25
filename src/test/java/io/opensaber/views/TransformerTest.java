@@ -51,7 +51,7 @@ public class TransformerTest {
         ViewTemplate viewTemplate = new ObjectMapper().readValue(viewTemplateJson, ViewTemplate.class);
 
         JsonNode actualnode = transformer.transform(viewTemplate, node); 
-        JsonNode expectedNode = new ObjectMapper().readTree("{\"Math\":{\"addend_A\":5,\"addend_B\":2,\"SUM\":\"7\"}}");        
+        JsonNode expectedNode = new ObjectMapper().readTree("{\"Math\":{\"addend_A\":5,\"addend_B\":2,\"SUM\":7}}");        
         assertEquals(expectedNode.toString(), actualnode.toString());
 
     }
