@@ -42,7 +42,7 @@ public class Transformer {
                 }
                 function.setArgValues(actualValues);
 
-                FunctionEvaluator<String> evaluator = new FunctionEvaluator(function);
+                IEvaluator<Object> evaluator = EvaluatorFactory.getInstance(fdName, function);
 
                 if (field.getDisplay()) {
                     Object evaluatedValue = evaluator.evaluate();
