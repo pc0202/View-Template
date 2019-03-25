@@ -38,25 +38,24 @@ public class ViewTemplate {
     public void setFields(List<Field> fields) {
         this.fields = fields;
     }
+
     /**
-     * return the result for a given function name 
-     * Example: "arg1 + \" : \" + arg2"
-     * 
-     * @param name      function name (like concat)
-     * @return          result
+     * return a FunctionDefinition for a given function name 
+
+     * @param name    function name (like concat)
+     * @return
      */
-    public String getExpression(String name) {
-        String expression = "";
+    public FunctionDefinition getFunctionDefinition(String name) {
+        FunctionDefinition functionDef = null;
         for (FunctionDefinition fd : this.getFunctionDefinitions()) {
             if (fd.getName().compareTo(name) == 0) {
-                expression = fd.getResult()!=null ? fd.getResult(): fd.getProvider();
-
+                functionDef = fd;
             }
         }
-        if (expression.isEmpty()) {
+        if (functionDef == null) {
             logger.error("No function definition specified for function - " + name);
             throw new IllegalArgumentException("No function definition specified for function - " + name);
         }
-        return expression;
+        return functionDef;
     }
 }

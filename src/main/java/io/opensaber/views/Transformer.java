@@ -32,18 +32,15 @@ public class Transformer {
             if (functionStr != null) {
 
                 String fdName = field.getFunctioName();
-                String expression = viewTemplate.getExpression(fdName);
-
-                FieldFunction function = new FieldFunction(expression);
+                FunctionDefinition funcDef = viewTemplate.getFunctionDefinition(fdName);            
+                                
                 List<Object> actualValues = new ArrayList<>();
                 for (String oneArg : field.getArgNames()) {
                     // Cut off the $
                     actualValues.add(ValueType.getValue(nodeAttrs.get(oneArg.substring(1))));
                 }
-                function.setArgValues(actualValues);
-
-                IEvaluator<Object> evaluator = EvaluatorFactory.getInstance(fdName, function);
                 
+                IEvaluator<Object> evaluator = EvaluatorFactory.getInstance(actualValues, funcDef);
                 if (field.getDisplay()) {
                     Object evaluatedValue = evaluator.evaluate();
                     if(evaluatedValue instanceof String){
@@ -60,5 +57,6 @@ public class Transformer {
         logger.debug("Node transformation result: " + result);
         return JsonNodeFactory.instance.objectNode().set(subjectType, result);
     }
+    
 
 }

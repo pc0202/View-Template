@@ -1,33 +1,31 @@
 package io.opensaber.views;
 
+import java.util.List;
+
 public class EvaluatorFactory {
     
-    public static final String concat = "concat";
-    public static final String userDefinedConcat = "userDefinedConcat";
-    public static final String customDefinedConcat = "customDefinedConcat";
     /**
      * returns the instance of IEvaluator implementations (like:FunctionEvaluator, ProviderEvaluator 
-     * @param functionName
-     * @param function
+     * 
+     * @param actualValues
+     * @param functiondef
      * @return
      */
-    public static IEvaluator<Object> getInstance(String functionName, FieldFunction function){
+    public static IEvaluator<Object> getInstance(List<Object> actualValues, FunctionDefinition functiondef) {
         IEvaluator<Object> evaluator = null;
-        switch(functionName){ 
-        
-        case concat :
+        FieldFunction function = null;
+
+        if (functiondef.getResult() != null) {
+            function = new FieldFunction(functiondef.getResult());
+            function.setArgValues(actualValues);
             evaluator = new FunctionEvaluator(function);
-            break;
-        case userDefinedConcat :
+
+        } else if (functiondef.getProvider() != null) {
+            function = new FieldFunction(functiondef.getProvider());
+            function.setArgValues(actualValues);
             evaluator = new ProviderEvaluator(function);
-            break;
-        case customDefinedConcat :
-            break;
-        default :
-            evaluator = new FunctionEvaluator(function);
-            break;
-        }  
-        
+        }
+
         return evaluator;
     }
     
