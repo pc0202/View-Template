@@ -42,16 +42,15 @@ public class TransformerTest {
                 "                \"b\": 2 }}";
         ObjectNode node = (ObjectNode) new ObjectMapper().readTree(mathProblem);
 
-        // read from the ViewTemplate
         String viewTemplateJson = readFileContent("mathVT1.json");
         ViewTemplate viewTemplate = new ObjectMapper().readValue(viewTemplateJson, ViewTemplate.class);
 
-        JsonNode actualnode = transformer.transform(viewTemplate, node);  
-        JsonNode expectedNode = new ObjectMapper().readTree("{\"Math\":{\"addend_A\":5,\"addend_B\":2,\"SUM\":\"7\"}}");
-        assertEquals(expectedNode, actualnode);
+        JsonNode actualnode = transformer.transform(viewTemplate, node); 
+        JsonNode expectedNode = new ObjectMapper().readTree("{\"Math\":{\"addend_A\":5,\"addend_B\":2,\"SUM\":7}}");        
+        assertEquals(expectedNode.toString(), actualnode.toString());
 
     }
-    
+  
     private static String readFileContent(String fileName) {
         InputStream in;
         try {
