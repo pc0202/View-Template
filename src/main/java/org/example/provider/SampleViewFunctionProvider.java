@@ -1,4 +1,4 @@
-package io.opensaber.provider;
+package org.example.provider;
 
 import io.opensaber.views.IViewFunctionProvider;
 import java.util.List;

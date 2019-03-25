@@ -16,17 +16,27 @@ public class EvaluatorFactory {
         FieldFunction function = null;
 
         if (functiondef.getResult() != null) {
-            function = new FieldFunction(functiondef.getResult());
-            function.setArgValues(actualValues);
+            function = getFieldFunction(functiondef.getResult(), actualValues);
             evaluator = new FunctionEvaluator(function);
 
         } else if (functiondef.getProvider() != null) {
-            function = new FieldFunction(functiondef.getProvider());
-            function.setArgValues(actualValues);
+            function = getFieldFunction(functiondef.getProvider(), actualValues);
             evaluator = new ProviderEvaluator(function);
         }
 
         return evaluator;
+    }
+    /**
+     * Creates FieldFunction and sets argValues
+     * @param expression
+     * @param actualValues
+     * @return
+     */
+    private static FieldFunction getFieldFunction(String expression, List<Object> actualValues) {
+        FieldFunction function = new FieldFunction(expression);
+        function.setArgValues(actualValues);
+        return function;
+
     }
     
 }
