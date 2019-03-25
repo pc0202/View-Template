@@ -37,6 +37,8 @@
       },
       {
             "name" : "userDefinedConcat",
+            "result": "arg1 + \", \" + arg2",
+            
             "provider": "io.opensaber.provider.SampleViewFunctionProvider",
             "$comment" : "Complex operations that cannot be expressed easily in an in-line function definition can be implemented as a class. "
       },

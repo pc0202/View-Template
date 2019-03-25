@@ -40,7 +40,7 @@ public class Transformer {
                     actualValues.add(ValueType.getValue(nodeAttrs.get(oneArg.substring(1))));
                 }
                 
-                IEvaluator<Object> evaluator = EvaluatorFactory.getInstance(actualValues, funcDef);
+                IEvaluator<Object> evaluator = EvaluatorFactory.getInstance(funcDef, actualValues);
                 if (field.getDisplay()) {
                     Object evaluatedValue = evaluator.evaluate();
                     if(evaluatedValue instanceof String){
