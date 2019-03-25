@@ -42,11 +42,15 @@ public class Transformer {
                 }
                 function.setArgValues(actualValues);
 
-                FunctionEvaluator evaluator = new FunctionEvaluator(function);
-
+                IEvaluator<Object> evaluator = EvaluatorFactory.getInstance(fdName, function);
+                
                 if (field.getDisplay()) {
-                    result.put(field.getTitle(), evaluator.evaluate().toString());
-
+                    Object evaluatedValue = evaluator.evaluate();
+                    if(evaluatedValue instanceof String){
+                        result.put(field.getTitle(), evaluatedValue.toString());
+                    } else {
+                        result.set(field.getTitle(), JsonNodeFactory.instance.pojoNode(evaluatedValue));
+                    }
                 }
             } else if (field.getDisplay()) {
                 result.set(field.getTitle(), nodeAttrs.get(field.getName()));
