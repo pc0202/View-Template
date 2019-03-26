@@ -26,17 +26,17 @@ public class ViewTemplateTest {
     @Test
     public void testGetExpression() {
 
-        String result = vt.getExpression("name");
+        FunctionDefinition fd = vt.getFunctionDefinition("name");
 
-        assertEquals(vt.getFunctionDefinitions().get(0).getResult(), result);
-        assertNotEquals("unexpected", result);
+        assertEquals(vt.getFunctionDefinitions().get(0).getResult(), fd.getResult());
+        assertNotEquals("unexpected", fd.getResult());
 
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void testGetExpressionException() {
 
-        vt.getExpression("invalid_name");
+        vt.getFunctionDefinition("invalid_name");
 
     }
 

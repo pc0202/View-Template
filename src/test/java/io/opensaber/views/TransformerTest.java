@@ -18,27 +18,17 @@ public class TransformerTest {
     private Transformer transformer = new Transformer();
   
     @Test
-    public void testTransformForPersonVT() throws JsonProcessingException, IOException{
-        String personJson = "{\"Person\": " +
-                "               {\"nationalIdentifier\":\"nid823\"," +
-                "                \"firstName\":\"Ram\"," +
-                "                \"lastName\":\"Moorthy\"," +
-                "                \"gender\":\"MALE\"," +
-                "                \"dob\":\"1990-12-10\"}}";
-        ObjectNode personNode = (ObjectNode) new ObjectMapper().readTree(personJson);
-        String viewTemplateJson = readFileContent("personVT1.json");
-        ViewTemplate viewTemplate = new ObjectMapper().readValue(viewTemplateJson, ViewTemplate.class);
+    public void testTransformForPersonFunction() throws JsonProcessingException, IOException{
+
+        ObjectNode personNode = getPerson();
+        ViewTemplate viewTemplate = getViewTemplatePerson("person_vt.json");
 
         JsonNode actualnode = transformer.transform(viewTemplate, personNode);  
-
-        System.out.println("actualnode = "+actualnode);
-        JsonNode expectedNode = new ObjectMapper().readTree("{\"Person\":{\"NAME\":\"Ram\",\"lastName\":\"Moorthy\",\"Name in passport\":\"Moorthy, Ram\"}}");
-        System.out.println("expectedNode = "+expectedNode);
+        JsonNode expectedNode = new ObjectMapper().readTree("{\"Person\":{\"NAME\":\"Ram\",\"lastName\":\"Moorthy\",\"Name in passport\":\"Moorthy, Ram\",\"Name as in DL\":\"Ram : Moorthy\"}}");
 
         assertEquals(expectedNode, actualnode);
 
     }
-    
 
     @Test
     public void testTransformForMathVT() throws JsonProcessingException, IOException{
@@ -47,13 +37,28 @@ public class TransformerTest {
                 "                \"b\": 2 }}";
         ObjectNode node = (ObjectNode) new ObjectMapper().readTree(mathProblem);
 
-        String viewTemplateJson = readFileContent("mathVT1.json");
-        ViewTemplate viewTemplate = new ObjectMapper().readValue(viewTemplateJson, ViewTemplate.class);
-
+        ViewTemplate viewTemplate = getViewTemplatePerson("mathVT1.json");
         JsonNode actualnode = transformer.transform(viewTemplate, node); 
-        JsonNode expectedNode = new ObjectMapper().readTree("{\"Math\":{\"addend_A\":5,\"addend_B\":2,\"SUM\":\"7\"}}");        
+        JsonNode expectedNode = new ObjectMapper().readTree("{\"Math\":{\"addend_A\":5,\"addend_B\":2,\"SUM\":7}}");        
         assertEquals(expectedNode.toString(), actualnode.toString());
 
+    }
+    
+    
+    private ViewTemplate getViewTemplatePerson(String personJsonFileName) throws JsonProcessingException, IOException{
+
+        String viewTemplateJson = readFileContent(personJsonFileName);
+        return new ObjectMapper().readValue(viewTemplateJson, ViewTemplate.class);
+    }
+    
+    private ObjectNode getPerson() throws JsonProcessingException, IOException{
+        String personJson = "{\"Person\": " +
+                "               {\"nationalIdentifier\":\"nid823\"," +
+                "                \"firstName\":\"Ram\"," +
+                "                \"lastName\":\"Moorthy\"," +
+                "                \"gender\":\"MALE\"," +
+                "                \"dob\":\"1990-12-10\"}}";
+        return (ObjectNode) new ObjectMapper().readTree(personJson);
     }
   
     private static String readFileContent(String fileName) {

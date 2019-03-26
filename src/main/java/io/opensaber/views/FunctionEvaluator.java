@@ -7,7 +7,7 @@ import org.apache.commons.jexl2.JexlEngine;
 import org.apache.commons.jexl2.MapContext;
 
 
-public class FunctionEvaluator {
+public class FunctionEvaluator implements IEvaluator<Object>{
 
     private static final JexlEngine jexl = new JexlEngine();
     private JexlContext jexlContext = new MapContext();
@@ -34,6 +34,7 @@ public class FunctionEvaluator {
         setContextArgs();
     }
 
+    @Override
     public Object evaluate() {
         prepare();
         Object result = jexlExpression.evaluate(jexlContext);

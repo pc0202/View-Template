@@ -18,7 +18,7 @@
     },
     {
         "title": "Name in passport",
-        "function": "#/functionDefinitions/concat($lastName, $firstName)",
+        "function": "#/functionDefinitions/customDefinedConcat($lastName, $firstName)",
         "$comment": "This is a virtual field not defined in the schema"
     },
     {
@@ -37,12 +37,12 @@
       },
       {
             "name" : "userDefinedConcat",
-            "provider": "user.opensaber.registry.utils.MySplConcatenator",
+            "provider": "io.opensaber.provider.SampleViewFunctionProvider",
             "$comment" : "Complex operations that cannot be expressed easily in an in-line function definition can be implemented as a class. "
       },
       {
             "name" : "customDefinedConcat",
-            "$ref": "AnotherViewTemplate.json#functionDefinitions/customDefinedConcat",
+            "result": "arg1 + \", \" + arg2",
             "$comment": "The functions defined in another template can be reused"
       }
   ]
