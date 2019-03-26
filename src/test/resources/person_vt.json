@@ -18,9 +18,15 @@
     },
     {
         "title": "Name in passport",
-        "function": "#/functionDefinitions/userDefinedConcat($lastName, $firstName)",
+        "function": "#/functionDefinitions/concat($lastName, $firstName)",
         "$comment": "This is a virtual field not defined in the schema"
     },
+    {
+        "title": "Name as in DL",
+        "function": "#/functionDefinitions/userDefinedConcat($firstName, $lastName)",
+        "$comment": "This is a virtual field not defined in the schema"
+    },
+
     {
         "name": "vehicles",
         "$comment": "Nested child entity which may be of interest",
@@ -42,7 +48,7 @@
       },
       {
             "name" : "customDefinedConcat",
-            "$ref": "AnotherViewTemplate.json#functionDefinitions/customDefinedConcat",
+            "$ref": "person_ref.json#functionDefinitions/customDefinedConcat",
             "$comment": "The functions defined in another template can be reused"
       }
   ]

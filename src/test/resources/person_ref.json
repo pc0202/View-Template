@@ -42,7 +42,7 @@
       },
       {
             "name" : "customDefinedConcat",
-            "$ref": "AnotherViewTemplate.json#functionDefinitions/customDefinedConcat",
+            "result": "arg1 + \", \" + arg2",
             "$comment": "The functions defined in another template can be reused"
       }
   ]

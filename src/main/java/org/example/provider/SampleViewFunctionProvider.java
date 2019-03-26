@@ -23,7 +23,7 @@ public class SampleViewFunctionProvider implements IViewFunctionProvider<String>
     public String concat(List<Object> args) {
         String res = "";
         for (Object arg : args) {
-            res = res.toString().isEmpty() ? arg.toString() : (res + ", " + arg.toString());
+            res = res.toString().isEmpty() ? arg.toString() : (res + " : " + arg.toString());
         }
         return res;
     }

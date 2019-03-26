@@ -21,23 +21,10 @@ public class TransformerTest {
     public void testTransformForPersonFunction() throws JsonProcessingException, IOException{
 
         ObjectNode personNode = getPerson();
-        ViewTemplate viewTemplate = getViewTemplatePerson("person_inline.json");
+        ViewTemplate viewTemplate = getViewTemplatePerson("person_vt.json");
 
         JsonNode actualnode = transformer.transform(viewTemplate, personNode);  
-        JsonNode expectedNode = new ObjectMapper().readTree("{\"Person\":{\"NAME\":\"Ram\",\"lastName\":\"Moorthy\",\"Name in passport\":\"Moorthy, Ram\"}}");
-
-        assertEquals(expectedNode, actualnode);
-
-    }
-    
-    @Test
-    public void testTransformForPersonProvider() throws JsonProcessingException, IOException{
-
-        ObjectNode personNode = getPerson();
-        ViewTemplate viewTemplate = getViewTemplatePerson("person_provider.json");
-        
-        JsonNode actualnode = transformer.transform(viewTemplate, personNode);  
-        JsonNode expectedNode = new ObjectMapper().readTree("{\"Person\":{\"NAME\":\"Ram\",\"lastName\":\"Moorthy\",\"Name in passport\":\"Moorthy, Ram\"}}");
+        JsonNode expectedNode = new ObjectMapper().readTree("{\"Person\":{\"NAME\":\"Ram\",\"lastName\":\"Moorthy\",\"Name in passport\":\"Moorthy, Ram\",\"Name as in DL\":\"Ram : Moorthy\"}}");
 
         assertEquals(expectedNode, actualnode);
 
